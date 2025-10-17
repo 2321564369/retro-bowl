@@ -1,49 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retro Bowl</title>
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            background: #222;
-            color: #fff;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-        canvas {
-            image-rendering: pixelated;
-            display: block;
-            max-width: 100%;
-            max-height: 100%;
-        }
-        #GM4HTML5_loadingscreen {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retro Bowl</title>
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    background: #222;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+canvas {
+    image-rendering: pixelated;
+    display: block;
+}
+#GM4HTML5_loadingscreen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+</style>
 </head>
 <body>
 
-<div id="game-container">
-    <img src="html5game/splash.png" id="GM4HTML5_loadingscreen" alt="Loading..." />
+<img src="html5game/splash.png" id="GM4HTML5_loadingscreen" alt="Loading..."/>
+<canvas id="canvas" width="960" height="540"></canvas>
 
-    <canvas id="canvas" width="960" height="540">
-        <p>Your browser does not support HTML5 canvas.</p>
-    </canvas>
-</div>
-
-<script src="html5game/retrobowl.js"></script>
 <script>
-    window.onload = GameMaker_Init;
+    // Set base path for GameMaker assets
+    window.GMAssetBase = 'html5game/';
+
+    // Load main game script
+    const gameScript = document.createElement('script');
+    gameScript.src = 'html5game/retrobowl.js'; // replaced RetroBowl.js
+    document.body.appendChild(gameScript);
+
+    // Optional extra JS (uph_poki.js)
+    const extraScript = document.createElement('script');
+    extraScript.src = 'html5game/uph_poki.js';
+    document.body.appendChild(extraScript);
+
+    // Initialize game when scripts are loaded
+    gameScript.onload = () => {
+        window.onload = GameMaker_Init;
+    };
 </script>
 
 </body>
